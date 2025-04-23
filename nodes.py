@@ -72,7 +72,6 @@ def run_inference(
             if (
                 audio_data is None or audio_data.size == 0 or audio_data.max() == 0
             ):  # Check for silence/empty
-                gr.Warning("Audio prompt seems empty or silent, ignoring prompt.")
             else:
                 # Save prompt audio to a temporary WAV file
                 with tempfile.NamedTemporaryFile(
@@ -86,9 +85,6 @@ def run_inference(
                         max_val = np.iinfo(audio_data.dtype).max
                         audio_data = audio_data.astype(np.float32) / max_val
                     elif not np.issubdtype(audio_data.dtype, np.floating):
-                        gr.Warning(
-                            f"Unsupported audio prompt dtype {audio_data.dtype}, attempting conversion."
-                        )
                         # Attempt conversion, might fail for complex types
                         try:
                             audio_data = audio_data.astype(np.float32)
@@ -127,7 +123,6 @@ def run_inference(
                         )
                     except Exception as write_e:
                         print(f"Error writing temporary audio file: {write_e}")
-                        raise gr.Error(f"Failed to save audio prompt: {write_e}")
 
         # 3. Run Generation
 
@@ -189,16 +184,11 @@ def run_inference(
 
         else:
             print("\nGeneration finished, but no valid tokens were produced.")
-            # Return default silence
-            gr.Warning("Generation produced no output.")
 
     except Exception as e:
         print(f"Error during inference: {e}")
         import traceback
-
         traceback.print_exc()
-        # Re-raise as Gradio error to display nicely in the UI
-        raise gr.Error(f"Inference failed: {e}")
 
     finally:
         # 5. Cleanup Temporary Files defensively
