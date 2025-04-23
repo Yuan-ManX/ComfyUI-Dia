@@ -64,6 +64,40 @@ class InputDiaText:
         return (text,)
 
 
+class LoadDiaAudioFile:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "file_path": ("STRING", {
+                    "default": "./example_audio_prompt.wav",
+                    "multiline": False
+                })
+            }
+        }
+
+    RETURN_TYPES = ("AUDIO",)
+    RETURN_NAMES = ("audio",)
+    FUNCTION = "load_audio"
+    CATEGORY = "Dia-TTS"
+
+    def load_audio(self, file_path):
+        path = Path(file_path)
+        if not path.exists():
+            raise Exception(f"Audio file not found: {file_path}")
+        
+        try:
+            audio_data, sr = sf.read(str(path))
+            if audio_data.ndim > 1:
+                # 转为单声道
+                audio_data = np.mean(audio_data, axis=1)
+            audio_data = np.ascontiguousarray(audio_data).astype(np.float32)
+        except Exception as e:
+            raise Exception(f"Failed to read audio file: {e}")
+        
+        return (sr, audio_data)
+
+
 class DiaTTS:
     @classmethod
     def INPUT_TYPES(s):
