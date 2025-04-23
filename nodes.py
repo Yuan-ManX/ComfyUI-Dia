@@ -43,7 +43,7 @@ class LoadDiaModel:
         return (model,)
 
 
-class InputText:
+class InputDiaText:
     @classmethod
     def INPUT_TYPES(s):
         return {
