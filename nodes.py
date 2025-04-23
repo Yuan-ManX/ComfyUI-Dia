@@ -42,3 +42,25 @@ class LoadDiaModel:
         model = Dia.from_pretrained(model_path, device=device_torch)
         return (model,)
 
+
+class InputText:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "text": ("STRING", {
+                    "default": "Enter your speech text here...",
+                    "multiline": True
+                })
+            }
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("text",)
+    FUNCTION = "return_text"
+    CATEGORY = "Dia-TTS"
+
+    def return_text(self, text):
+        return (text,)
+
+
