@@ -64,7 +64,7 @@ class InputDiaText:
         return (text,)
 
 
-class LoadDiaAudioFile:
+class LoadDiaAudio:
     @classmethod
     def INPUT_TYPES(s):
         return {
