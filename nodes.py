@@ -258,3 +258,25 @@ class DiaTTS:
         return (output_audio,)
 
 
+class SaveDiaAudio:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "audio": ("AUDIO",),
+                "file_path": ("STRING", {
+                    "default": "./output.wav",
+                })
+            }
+        }
+
+    RETURN_TYPES = ("STRING",)
+    FUNCTION = "save"
+    CATEGORY = "Dia-TTS"
+
+    def save(self, audio, file_path):
+        sr, data = audio
+        sf.write(file_path, data, sr)
+        return (f"Saved to: {Path(file_path).resolve()}",)
+
+
