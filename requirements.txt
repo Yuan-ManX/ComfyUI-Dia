@@ -1,6 +1,6 @@
 descript-audio-codec
 huggingface-hub>=0.30.2
-numpy>=2.2.4
+numpy
 pydantic>=2.11.3
 soundfile>=0.13.1
 torch>=2.6.0
