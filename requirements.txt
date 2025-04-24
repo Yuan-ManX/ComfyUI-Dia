@@ -1,8 +1,8 @@
 descript-audio-codec
-huggingface-hub>=0.30.2
+huggingface-hub
 numpy
-pydantic>=2.11.3
-soundfile>=0.13.1
-torch>=2.6.0
-torchaudio>=2.6.0
-triton>=3.2.0
+pydantic
+soundfile
+torch
+torchaudio
+triton
