@@ -1,0 +1,15 @@
+[project]
+name = "dia"
+description = "Make Dia avialbe in ComfyUI."
+version = "1.0.0"
+license = {file = "LICENSE"}
+dependencies = ["descript-audio-codec", "huggingface-hub", "numpy", "pydantic", "soundfile", "torch", "torchaudio", "triton"]
+
+[project.urls]
+Repository = "https://github.com/Yuan-ManX/ComfyUI-Dia"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "ComfyUI-Dia"
+Icon = ""
